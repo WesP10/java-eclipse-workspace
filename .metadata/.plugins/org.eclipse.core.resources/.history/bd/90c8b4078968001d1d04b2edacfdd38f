@@ -1,0 +1,246 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+public class CalcGUI implements ActionListener{
+	
+	private JPanel panel;
+	private JFrame frame;
+	private JLabel screen;
+	private ArrayList<JButton> buttons;
+	private String val;
+	private final int WIDTH, SPACING, LENGTH, SCREENSIZE, XINS, YINS;
+	private Image background;
+	
+	public CalcGUI() {
+		background = newBackground();
+		WIDTH = 50;
+		SPACING = 10;
+		LENGTH = 3;
+		SCREENSIZE = 100;
+		XINS = 30;
+		YINS = 30;
+		val = "";
+		screen = newScreen();
+		buttons = newButtons(panel);
+		panel = newPanel(buttons, screen, background);
+		frame = newFrame(panel);
+		
+	}
+
+	private Image newBackground() {
+		Image t = null;
+		try {
+			InputStream is = new BufferedInputStream(new FileInputStream("Background.jpg"));
+			t = ImageIO.read(is);			
+		} catch (IOException e) {e.printStackTrace();}
+		return t;
+	}
+
+	private JLabel newScreen() {
+		JLabel temp = new JLabel();
+		temp.setBounds(XINS, YINS*2, SCREENSIZE*2, SCREENSIZE);
+		temp.setText("FILL ME WITH MATH!");
+		return temp;
+	}
+
+	private ArrayList<JButton> newButtons(JPanel panel){
+		ArrayList<JButton> temp = new ArrayList<JButton>();
+		for(int i = 0; i < 15; i++) {
+			JButton t = new JButton();
+			if(i < 10) {
+				t.setText(""+i);
+				t.setBounds(XINS+(i%LENGTH)*(SPACING+WIDTH), YINS+SCREENSIZE+(i/LENGTH)*(SPACING+WIDTH), WIDTH, WIDTH);
+			}
+			else
+				t = getButton(i-10);
+			t.addActionListener(this);
+			temp.add(t);
+		}
+		return temp;
+	}
+	
+	private JButton getButton(int i) {
+		JButton t = new JButton();
+		if(i == 0) {
+			t.setText("+");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 1) {
+			t.setText("-");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 2) {
+			t.setText("*");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 3) {
+			t.setText("/");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		else {
+			t.setText("Enter");
+			t.setBounds(XINS+(SPACING+WIDTH), YINS+SCREENSIZE+(LENGTH)*(SPACING+WIDTH), SPACING+WIDTH*2, WIDTH);
+		}
+		return t;
+	}
+
+	private JFrame newFrame(JPanel panel) {
+		JFrame temp = new JFrame();
+		temp.add(panel, BorderLayout.CENTER);
+		temp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		temp.setUndecorated(false);
+		temp.setPreferredSize(new Dimension(300, 395));;
+		temp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		temp.setTitle("THIS A CALCULATOR");
+		temp.pack();
+		temp.setVisible(true);
+		return temp;
+	}
+	
+	private ImagePanel newPanel(ArrayList<JButton> buttons, JLabel screen, Image bg) {
+		ImagePanel temp = new ImagePanel(bg, 0, 0);
+		temp.setSize(300, 395);
+		temp.setBorder(BorderFactory.createEmptyBorder(WIDTH, WIDTH, WIDTH, WIDTH));
+		temp.add(screen);
+		for(int i = 0; i < buttons.size(); i++)
+			temp.add(buttons.get(i));
+		return temp;
+	}
+	
+	public static void main(String[] args) {
+		new CalcGUI();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton hit = (JButton) e.getSource();
+		if(val.equals("Error"))
+			val = hit.getText();
+		else
+			val += " "+hit.getText();
+		if(!error())
+			val = "Error";
+		if(val.contains("Enter"))
+			compute();
+		System.out.println(val);
+		screen.setText(val);
+	}
+
+	private void compute() {
+		val = val.substring(0, val.indexOf("Enter")).trim();
+		if(computeError()) return;
+		/*
+		 * List of multiplication or division indexes in equation - Primary
+		 * List of addition or subtraction indexes in equation - Secondary
+		 * length 2 int[] contains index of operation and byte value of operation
+		 */
+		ArrayList<int[]> primaryOp = newPrimaryOp();
+		ArrayList<int[]> secondaryOp = newSecondaryOp();
+		for(int i = 0; i < primaryOp.size(); i++) {
+			
+			int[] left = newLeftSide(primaryOp.get(i)[0]);
+			int[] right = newRighttSide(primaryOp.get(i)[0]);
+			int result = (byte)primaryOp.get(i)[1]==42? left[1]*right[1]:left[1]/right[1];
+			
+		}
+	}
+
+	private int[] newRighttSide(int opIndx) {
+		int[] temp = new int[2];
+		int endIndx = val.length()-1;
+		for(int i = opIndx+1; i < val.length(); i++)
+			if(!isSpaceorNum((byte) val.charAt(i))) {
+				endIndx = i;
+				break;
+			}
+		String num = "";
+		for(int i = opIndx+1; i < endIndx; i++)
+			if(isNum((byte)val.charAt(i)))
+				num+=val.charAt(i);
+		temp[0] = endIndx;
+		temp[1] = Integer.parseInt(num);
+		return temp;
+	}
+
+	private int[] newLeftSide(int opIndx) {
+		int startIndx = 0;
+		for(int i = opIndx; i >= 0; i--)
+			if(!isSpaceorNum((byte) val.charAt(i))) {
+				startIndx = i;
+				break;
+			}
+		String num = "";
+		for(int i = startIndx+1; i < opIndx; i++)
+			if(isNum((byte)val.charAt(i)))
+				num+=val.charAt(i);
+		return Integer.parseInt(num);
+	}
+
+	private ArrayList<int[]> newSecondaryOp() {
+		ArrayList<int[]> temp = new ArrayList<int[]>();
+		for(int i = 0; i < val.length(); i++) {
+			byte cNum = (byte) val.charAt(i);
+			if(isSecondary(cNum))
+				temp.add(new int[] {i, cNum});
+		}
+		return temp;
+	}
+	private ArrayList<int[]> newPrimaryOp() {
+		ArrayList<int[]> temp = new ArrayList<int[]>();
+		for(int i = 0; i < val.length(); i++) {
+			byte cNum = (byte) val.charAt(i);
+			if(isPrimary(cNum))
+				temp.add(new int[] {i, cNum});
+		}
+		return temp;
+	}
+	private boolean computeError() {
+		//If they only have a number then the calculator just displays number
+		if(val.length() <= 2) return true;
+		//If last input was not a number
+		if((byte)val.charAt(val.length()-1) < 48 || (byte)val.charAt(val.length()-1) > 57
+				|| (byte)val.charAt(0) < 48 || (byte)val.charAt(0) > 57)
+			{
+				val = "Error";
+				return true;
+			}
+		return false;
+	} 	
+	private boolean isSpaceorNum(byte b) {
+		return b == 32 || isNum(b);
+	}
+	private boolean isNum(byte b) {
+		return (b >= 48 && b <= 57);
+	}
+	private boolean isPrimary(byte b) {
+		return b == 42 || b == 47;
+	}
+	private boolean isSecondary(byte b) {
+		return b == 43 || b == 45;
+	}	
+	private boolean error() {
+		if(val.length() < 3)
+			return true;
+		byte last = (byte)val.charAt(val.length()-1);
+		byte sec = (byte)val.charAt(val.length()-3);
+		/*48 is byte value of 0; 57 is byte value of 9
+		 *Returns if either the last or second to last input is a number
+		 */
+		return (last >= 48 && last <= 57) || (sec >= 48 && sec <= 57);
+	}
+
+}

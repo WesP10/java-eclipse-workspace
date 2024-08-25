@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/2D/2D.iml" filepath="$PROJECT_DIR$/2D/2D.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Arrays and array List/Arrays and array List.iml" filepath="$PROJECT_DIR$/Arrays and array List/Arrays and array List.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BinarySearchTrees/BinarySearchTrees.iml" filepath="$PROJECT_DIR$/BinarySearchTrees/BinarySearchTrees.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Classes and Objects/Classes and Objects.iml" filepath="$PROJECT_DIR$/Classes and Objects/Classes and Objects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Coding Problems/Coding Problems.iml" filepath="$PROJECT_DIR$/Coding Problems/Coding Problems.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CompSci Club/CompSci Club.iml" filepath="$PROJECT_DIR$/CompSci Club/CompSci Club.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiscordBots/DiscordBots.iml" filepath="$PROJECT_DIR$/DiscordBots/DiscordBots.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameForRaj/GameForRaj.iml" filepath="$PROJECT_DIR$/GameForRaj/GameForRaj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Inheritance/Inheritance.iml" filepath="$PROJECT_DIR$/Inheritance/Inheritance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Javafx/Javafx.iml" filepath="$PROJECT_DIR$/Javafx/Javafx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Maze/Maze.iml" filepath="$PROJECT_DIR$/Maze/Maze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MiniBankProject/MiniBankProject.iml" filepath="$PROJECT_DIR$/MiniBankProject/MiniBankProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Processing Intro/Processing Intro.iml" filepath="$PROJECT_DIR$/Processing Intro/Processing Intro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Recursion/Recursion.iml" filepath="$PROJECT_DIR$/Recursion/Recursion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Solitare/Solitare.iml" filepath="$PROJECT_DIR$/Solitare/Solitare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Space Invaders/Space Invaders.iml" filepath="$PROJECT_DIR$/Space Invaders/Space Invaders.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sudoko Solver/Sudoko Solver.iml" filepath="$PROJECT_DIR$/Sudoko Solver/Sudoko Solver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TheSimpleSwim/TheSimpleSwim.iml" filepath="$PROJECT_DIR$/TheSimpleSwim/TheSimpleSwim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TicTacToe/TicTacToe.iml" filepath="$PROJECT_DIR$/TicTacToe/TicTacToe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TurtleGraphics/TurtleGraphics.iml" filepath="$PROJECT_DIR$/TurtleGraphics/TurtleGraphics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/USACO Broze/USACO Broze.iml" filepath="$PROJECT_DIR$/USACO Broze/USACO Broze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Unit2Test/Unit2Test.iml" filepath="$PROJECT_DIR$/Unit2Test/Unit2Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Unit4 Searching and Sorting/Unit4 Searching and Sorting.iml" filepath="$PROJECT_DIR$/Unit4 Searching and Sorting/Unit4 Searching and Sorting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Word Game/Word Game.iml" filepath="$PROJECT_DIR$/Word Game/Word Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wordle/Wordle.iml" filepath="$PROJECT_DIR$/Wordle/Wordle.iml" />
+    </modules>
+  </component>
+</project>

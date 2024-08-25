@@ -1,0 +1,14 @@
+
+public class MainTest {
+	public static void main(String[] args) {
+		char a = '+';
+		char b = '-';
+		System.out.println((byte)a);
+		System.out.println((byte)b);
+		char c = 'x';
+		char d = '/';
+		System.out.println((byte)c);
+		System.out.println((byte)d);
+	}
+
+}

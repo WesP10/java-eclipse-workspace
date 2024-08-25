@@ -1,0 +1,18 @@
+
+public class Swimmer {
+
+	private int x, y;
+	private final int width, height;
+	private final String imgPath;
+	
+	public Swimmer(int x, int y, int width, int height) {
+		this.x=x;
+		this.y=y;
+		this.width=width;
+		this.height=height;
+		imgPath = "";
+	}
+	public void move() {
+		y+=30;
+	}
+}

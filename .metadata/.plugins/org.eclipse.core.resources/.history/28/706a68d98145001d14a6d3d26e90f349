@@ -1,0 +1,103 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/*
+ID: Wes10
+LANG: JAVA
+TASK: friday
+PROG: friday
+*/
+
+public class friday {
+
+	public static void main(String[] args) throws IOException {
+		//BufferedReader f = new BufferedReader(new FileReader("gift1.in"));
+	    //PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("gift1.out")));
+	    int year = 1900;
+	    int month = 1;
+	    int day = 0;
+	    boolean isThirty = false;
+	    boolean isFeb = false;
+	    boolean isLeap = false;
+	    boolean endM = false;
+	    boolean endY = false;
+	    boolean search = true;
+	    int[] daysCount =  new int[7];
+	    int dayOfWeek = 1; //0 is Sunday-6 is Saturday
+	    //int yearStop = Integer.parseInt(f.readLine())+1899;
+	    int yearStop = 1919;
+	    while(search) 
+	    {
+	    	endM = false;
+	    	endY = false;
+	    	day++;
+	    	//checking year reset and isThirty
+	    	if(month == 4 || month == 6 || month == 9 || month == 11) {
+	    		isThirty = true;
+	    		isFeb = false;
+	    	}
+	    	else if(month == 2) {
+	    		isFeb = true;
+	    		isThirty = false;
+	    	}
+	    	else {
+	    		isThirty = false;
+	    		isFeb = false;
+	    	}
+	    	//Checking leap year
+	    	if(year%4==0 && year!=1900)
+	    		isLeap = true;
+	    	else
+	    		isLeap = false;
+	    	//Checking month reset
+	    	if(day > 28 && isFeb && isLeap) {
+	    		day = 1;
+	    		month++;
+	    		endM = true;
+	    		System.out.println("month up");
+	    	}
+	    	if(day > 29 && isFeb) {
+	    		day = 1;
+	    		month++;
+	    		endM = true;
+	    		System.out.println("month up");
+	    	}
+	    	if(day > 30 && isThirty) {
+	    		day = 1;
+	    		month++;
+	    		endM = true;
+	    		System.out.println("month up");
+	    	}
+	    	if(day > 31) {
+	    		day = 1;
+	    		month++;
+	    		endM = true;
+	    		System.out.println("month up");
+	    	}
+	    	//Checking new year
+	    	if(month > 12 && endM) {
+	    		month = 1;
+	    		year++;
+	    		endY = true;
+	    		System.out.println("year up");
+	    	}
+	    	//Checking for end
+	    	if(endM && endY && year == yearStop) {
+	    		search = false;
+	    	}
+	    	//checking thirteenth
+	    	if(day == 13)
+	    		daysCount[dayOfWeek]++;
+	    	if(dayOfWeek == 6)
+	    		dayOfWeek = 0;
+	    	else
+	    		dayOfWeek++;
+	    }
+	    for(int i : daysCount)
+	    	System.out.println(i);
+	}
+}

@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+
+import ProcessingIntro.Button;
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class GraphicDriver extends PApplet{
+	public static void main(String[] args) { PApplet.main("GraphicDriver");	}
+
+	private final int HEIGHT=1200, WIDTH=600, PLAYER_SIZE=75;
+	private int screenY;
+	private Button button;
+	private boolean RED;
+	private Swimmer swimmer;
+	private PImage backPImage;
+	private ArrayList<Fish> fishs;
+	
+	public void settings() {
+		size(WIDTH, WIDTH);
+		button = new Button(WIDTH/2-150, WIDTH-175, WIDTH/2, WIDTH/5, "Swim");
+	}
+	public void setup() {
+		strokeWeight(10);
+		button.setBackground(130, 230, 75);
+		swimmer = new Swimmer(WIDTH/2-PLAYER_SIZE, HEIGHT, PLAYER_SIZE, this);
+		fishs = genFish();
+		screenY = swimmer.getY()-height;
+		backPImage = loadImage("Background.png");
+		backPImage.resize(600, 1200);
+	}
+	public void draw() {
+		drawBackground();
+		button.draw(this);
+		swimmer.draw(this);
+		swimmer.gravity();
+		drawFish();
+	}
+	public void mousePressed() {
+		swimmer.swimUp();
+	}
+	public void drawBackground() {
+		screenY = swimmer.getY()-height;
+		copy(backPImage, 0, screenY, width, height, 0, 0, width, height);
+	}
+	private void drawFish() {
+		for(int i = 0; i < fishs.size(); i++) {
+			Fish curFish = fishs.get(i);
+			if(curFish.getY()+curFish.getHeight()>screenY && curFish.getY()<screenY+height)
+				curFish.draw(this);
+		}
+	}
+	private ArrayList<Fish> genFish() {
+		ArrayList<Fish> t = new ArrayList<Fish>();
+		for(int i = 0; i < 10; i++) {
+			Fish tempFish = new Fish(300, (int)(Math.random()*800), (int)(Math.random()*4), this);
+			t.add(tempFish);
+		}
+		return t;
+	}
+}
+	

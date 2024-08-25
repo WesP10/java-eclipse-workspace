@@ -1,0 +1,56 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Fish {
+
+	private int x, y, width, height;
+	private final int LIMIT=600;
+	private PImage image;
+	
+	public Fish(int x, int y, int fishType, PApplet driver) {
+		this.x = x;
+		this.y = y;
+		if(fishType==0) {
+			image = driver.loadImage("fish1.png");
+			width = 100;
+			height = 75;
+		}
+		if(fishType==1) {
+			image = driver.loadImage("fish2.png");
+			width = 125;
+			height = 50;
+		}
+		if(fishType==2) {
+			image = driver.loadImage("fish3.png");
+			width = 80;
+			height = 50;
+		}
+		if(fishType==3) {
+			image = driver.loadImage("fish4.png");
+			width = 150;
+			height = 100;
+		}
+		image.resize(width, height);
+	}
+	public void draw(PApplet window, int screenY) {
+		window.rect(x, y-screenY, width, height);
+		window.image(image, x, y-screenY);
+	}
+	public void update() {
+		x++;
+		if(x>LIMIT)
+			x=0;
+	}
+	public boolean contact(int pX, int pWidth, int pY, int pHeight, int screenY) {
+		int tempY = y-screenY;
+		return x+width > pX && x < pX+pWidth && tempY+height>pY && tempY<pY+pHeight;
+	}
+	public int getY() {
+		return y;
+	}
+	public int getHeight() {
+		return height;
+	}
+	
+}
+

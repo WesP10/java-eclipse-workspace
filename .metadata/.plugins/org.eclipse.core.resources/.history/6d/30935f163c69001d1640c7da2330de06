@@ -1,0 +1,27 @@
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+public class SnapAuto {
+
+	public static void main(String[] args) throws Exception {
+		Thread.sleep(5000);
+		Robot robot = new Robot();
+		farmTree(robot);
+//		for(int i = 0; i < 1000; i++) {
+//			farmTree(robot);
+//			Thread.sleep(10000);
+//		}
+	}
+
+	private static void farmTree(Robot robot) throws Exception {
+			robot.mouseMove(250, 550);
+			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+			robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+//			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+//			for(int i = 0; i < 20; i++) {
+//				robot.mouseMove(400, 400);
+//				robot.mouseMove(100, 400);
+//			}
+	}
+}

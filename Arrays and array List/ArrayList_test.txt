@@ -1,0 +1,7 @@
+This is a test file for the ArrayList project
+This SENTENCE Experiments with Capitalization OF WORDS
+this sentence is to duplicate some of the words already in the test file
+TEST FILE
+tesT filE
+Test File
+Last word supercalifragilisticexpialidocious

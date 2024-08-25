@@ -1,0 +1,159 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+public class CalcGUI implements ActionListener{
+	
+	private JPanel panel;
+	private JFrame frame;
+	private JLabel screen;
+	private ArrayList<JButton> buttons;
+	private String val;
+	private final int WIDTH, SPACING, LENGTH, SCREENSIZE, XINS, YINS;
+	private Image background;
+	
+	public CalcGUI() {
+		background = newBackground();
+		WIDTH = 50;
+		SPACING = 10;
+		LENGTH = 3;
+		SCREENSIZE = 100;
+		XINS = 30;
+		YINS = 29;
+		val = "";
+		screen = newScreen();
+		buttons = newButtons(panel);
+		panel = newPanel(buttons, screen, background);
+		frame = newFrame(panel);
+		
+	}
+
+	private Image newBackground() {
+		Image t = null;
+		try {
+			InputStream is = new BufferedInputStream(new FileInputStream("Background.jpg"));
+			t = ImageIO.read(is);			
+		} catch (IOException e) {e.printStackTrace();}
+		return t;
+	}
+
+	private JLabel newScreen() {
+		JLabel temp = new JLabel();
+		temp.setBounds(XINS, YINS*2, SCREENSIZE*2, SCREENSIZE);
+		temp.setText("FILL ME WITH MATH!");
+		return temp;
+	}
+
+	private ArrayList<JButton> newButtons(JPanel panel){
+		ArrayList<JButton> temp = new ArrayList<JButton>();
+		for(int i = 0; i < 15; i++) {
+			JButton t = new JButton();
+			if(i < 10) {
+				t.setText(""+i);
+				t.setBounds(XINS+(i%LENGTH)*(SPACING+WIDTH), YINS+SCREENSIZE+(i/LENGTH)*(SPACING+WIDTH), WIDTH, WIDTH);
+			}
+			else
+				t = getButton(i-10);
+			t.addActionListener(this);
+			temp.add(t);
+		}
+		return temp;
+	}
+	
+	private JButton getButton(int i) {
+		JButton t = new JButton();
+		if(i == 0) {
+			t.setText("+");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 1) {
+			t.setText("-");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 2) {
+			t.setText("*");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		if(i == 3) {
+			t.setText("/");
+			t.setBounds(XINS+(SPACING+WIDTH)*LENGTH, YINS+SCREENSIZE+(i)*(SPACING+WIDTH), WIDTH, WIDTH);
+			return t;
+		}
+		else {
+			t.setText("Enter");
+			t.setBounds(XINS+(SPACING+WIDTH), YINS+SCREENSIZE+(LENGTH)*(SPACING+WIDTH), SPACING+WIDTH*2, WIDTH);
+		}
+		return t;
+	}
+
+	private JFrame newFrame(JPanel panel) {
+		JFrame temp = new JFrame();
+		temp.add(panel, BorderLayout.CENTER);
+		temp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		temp.setUndecorated(false);
+		temp.setPreferredSize(new Dimension(300, 395));;
+		temp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		temp.setTitle("THIS A CALCULATOR");
+		temp.pack();
+		temp.setVisible(true);
+		return temp;
+	}
+	
+	private ImagePanel newPanel(ArrayList<JButton> buttons, JLabel screen, Image bg) {
+		ImagePanel temp = new ImagePanel(bg, 0, 0);
+		temp.setSize(300, 395);
+		temp.setBorder(BorderFactory.createEmptyBorder(WIDTH, WIDTH, WIDTH, WIDTH));
+		temp.add(screen);
+		for(int i = 0; i < buttons.size(); i++)
+			temp.add(buttons.get(i));
+		return temp;
+	}
+	
+	public static void main(String[] args) {
+		new CalcGUI();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton hit = (JButton) e.getSource();
+		if(val.equals("Error"))
+			val = hit.getText();
+		else
+			val += " "+hit.getText();
+		if(!error())
+			val = "Error";
+		if(val.contains("Enter"))
+			compute();
+		System.out.println(val);
+		screen.setText(val);
+	}
+
+	private void compute() {
+		
+		
+	}
+
+	private boolean error() {
+		if(val.length() < 3)
+			return true;
+		byte last = (byte)val.charAt(val.length()-1);
+		byte sec = (byte)val.charAt(val.length()-3);
+		/*48 is byte value of 0; 57 is byte value of 9
+		 *Returns if either the last or second to last input is a number
+		 */
+		return (last >= 48 || last <= 57) || (sec >= 48 || sec <= 57);
+	}
+
+}

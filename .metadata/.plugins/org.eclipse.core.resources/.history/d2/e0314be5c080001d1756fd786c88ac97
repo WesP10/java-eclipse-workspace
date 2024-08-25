@@ -1,0 +1,24 @@
+import ProcessingIntro.Button;
+import processing.core.PApplet;
+
+public class GraphicDriver extends PApplet{
+	public static void main(String[] args) { PApplet.main("GraphicDriver");	}
+
+	private final int HEIGHT=600, WIDTH=600;
+	private Button button;
+	
+	public void settings() {
+		size(WIDTH, HEIGHT);
+		button = new Button(WIDTH/2-150, HEIGHT-200, WIDTH/2, HEIGHT/4, "Swim");
+	}
+	public void setup() {
+		background(25, 125, 250);
+		strokeWeight(10);
+	}
+	public void draw() {
+		button.draw(this);
+	}
+	public void mousePressed() {
+		
+	}
+}

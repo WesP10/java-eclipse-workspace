@@ -1,0 +1,10 @@
+
+public class MainTest {
+	public static void main(String[] args) {
+		char a = '9';
+		char b = '0';
+		System.out.println((byte)a);
+		System.out.println((int)12/4);
+	}
+
+}

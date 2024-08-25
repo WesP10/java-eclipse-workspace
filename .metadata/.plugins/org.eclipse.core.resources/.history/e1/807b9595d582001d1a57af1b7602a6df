@@ -1,0 +1,30 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Swimmer {
+
+	private float x, y;
+	private final int size;
+	private final PImage IMG;
+	
+	public Swimmer(int x, int y, int size, PApplet driver) {
+		this.x=x;
+		this.y=y;
+		this.size = size;
+		IMG = driver.loadImage("Swimmer.png");
+		
+	}
+	public int getY() {
+		return (int)y;
+	}
+	public void swimUp() {
+			y-=15;
+	}
+	public void gravity() {
+		if(y < 1400)
+			y+=0.5;
+	}
+	public void draw(PApplet window) {
+		window.image(IMG, x, 300, (float)size, (float)size);
+	}
+}

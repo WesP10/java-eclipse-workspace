@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="eclipse-workspace">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Space Invaders.zip!/" />
+      <root url="jar://$PROJECT_DIR$/DiscordBots.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
