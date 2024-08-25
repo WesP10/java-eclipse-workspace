@@ -10,7 +10,6 @@ Player movement and collision detection
 Enemies with AI behavior
 Inventory system
 Quests and puzzles
-Repository path: zelda-game/
 # Sudoku Solver
 Description: Tired of staring at those unsolved Sudoku puzzles? Fear not! This program will solve them for you.
 Features:
@@ -24,22 +23,21 @@ Features:
 Binary search tree structure
 In-order, pre-order, and post-order traversal
 Node insertion and deletion
-Repository path: binary-search-tree/
 # Solitaire Card Game
 Description: Feeling nostalgic for Windows Solitaire? Build your own version! Learn about card shuffling, stacks, and rules.
 Features:
 Card deck management
 Tableau and foundation piles
 Drag-and-drop functionality
-Repository path: solitaire-game/
 # Calculator Program
 Description: Need to crunch some numbers? Our Java calculator has you covered. Basic arithmetic operations and more!
 Features:
 Addition, subtraction, multiplication, division
 Scientific functions (optional)
 User-friendly interface
-Repository path: calculator/
 Getting Started
+
+# And Many More
 
 ## Clone this repository to your local machine:
 git clone https://github.com/WesP10/java-eclipse-workspace.git
